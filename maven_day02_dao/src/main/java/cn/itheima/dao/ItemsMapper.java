@@ -6,5 +6,5 @@ import org.apache.ibatis.annotations.Select;
 public interface ItemsMapper {
 
     @Select("select * from items where id = #{id}")
-    public Items findById(Integer id);
+    Items findById(Integer id);
 }
