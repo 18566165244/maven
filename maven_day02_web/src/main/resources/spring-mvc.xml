@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+
+        http://www.springframework.org/schema/util
+        http://www.springframework.org/schema/util/spring-util.xsd">
+    <!--组件扫描-->
+    <context:component-scan base-package="cn.itheima.controller">
+        <!--如果扫描范围比较广，可能会和spring的扫描重复，可以做如下配置，让spring-mvc只扫描controller注解的-->
+       <!-- <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>-->
+    </context:component-scan>
+
+    <!--mvc注解驱动，可以完成处理器映射器的相同效果  并引用自定义转换器-->
+    <mvc:annotation-driven ></mvc:annotation-driven>
+
+    <!--开放对那些资源的访问权限  方式一 -->
+    <!--<mvc:resources mapping="/js/**" location="/js/"/>-->
+    <!--spring-mvc找不到对应的静态资源，交给tomcat来查找  方式二  -->
+    <mvc:default-servlet-handler/>
+
+    <!--配置内部资源视图解析器-->
+    <bean id="ViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!--前后缀    /jsp/success.jsp-->
+        <property name="prefix" value="/jsp/"></property>
+        <property name="suffix" value=".jsp"></property>
+    </bean>
+
+
+</beans>
